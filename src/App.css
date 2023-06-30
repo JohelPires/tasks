@@ -32,3 +32,8 @@ body {
 * {
     font-family: 'Nunito Sans', sans-serif;
 }
+
+h1 {
+    color: white;
+    letter-spacing: 2px;
+}

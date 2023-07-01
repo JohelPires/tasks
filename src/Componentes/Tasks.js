@@ -1,5 +1,6 @@
 import React from 'react'
 import Task from './Task'
+import './tasks.css'
 
 function Tasks() {
     const tarefas = [
@@ -57,7 +58,10 @@ function Tasks() {
 
     return (
         <div>
-            <h1>Tarefas</h1>
+            <div className="tarefas-header">
+                <h1>Tarefas</h1>
+                <button className="add-task">+</button>
+            </div>
             {tarefas.map((tarefa) => {
                 // if (tarefa.length > 40) {
                 //     tarefa = tarefa.slice(0, 40)

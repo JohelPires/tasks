@@ -1,6 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize')
 // const sequelize = require('../database/db')
-const SECRET_KEY = '151231la--kjlkj-aldkjaljda'
+const { SECRET_KEY, SALT } = require('../secret')
+
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
@@ -51,7 +52,7 @@ async function addUsuario(req, res) {
         })
     }
 
-    const hashedSenha = await bcrypt.hash(senha, 10)
+    const hashedSenha = await bcrypt.hash(senha, SALT)
 
     const usuario = { nome, email, senha: hashedSenha }
 

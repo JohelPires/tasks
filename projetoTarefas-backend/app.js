@@ -10,6 +10,13 @@ const RotasTarefa = require('./src/rotas/rotasTarefa')
 
 const PORT = process.env.PORT || 5000
 
+const cors = require('cors')
+app.use(
+    cors({
+        origin: '*',
+    })
+)
+
 app.use(express.json())
 
 app.use('/usuario', RotasUsuario)

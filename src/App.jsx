@@ -32,7 +32,7 @@ function App() {
                     </main>
                 </>
             ) : (
-                <Login />
+                <Login setToken={setToken} />
             )}
         </div>
     )

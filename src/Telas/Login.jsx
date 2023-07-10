@@ -28,15 +28,15 @@ function Login({ setToken }) {
     function handleSubmit(e) {
         e.preventDefault()
         setLoginData({ email, senha })
-        console.log(loginData)
+        console.table(loginData)
         fetchData(loginData)
     }
 
     return (
-        <div class="login-container">
+        <div className="login-container">
             <h2>Fazer Login:</h2>
             <form>
-                <label for="email">Email:</label>
+                <label htmlFor="email">Email:</label>
                 <br />
                 <input type="text" id="email" name="email" required onChange={(e) => setEmail(e.target.value)} />
                 <br />

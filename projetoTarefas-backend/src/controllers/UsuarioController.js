@@ -19,8 +19,10 @@ function listAll(req, res) {
 
 async function login(req, res) {
     const { email, senha } = req.body
-
-    const usuario = await Usuario.findOne({ where: { email } })
+    let usuario
+    if (email) {
+        usuario = await Usuario.findOne({ where: { email } })
+    }
     // console.log(usuario.id)
     if (!usuario) {
         return res.status(404).json({ erro: 'usuario não encontrado.' })
@@ -40,6 +42,7 @@ async function login(req, res) {
 
     return res.status(200).json({
         accessToken,
+        usuario,
     })
 }
 

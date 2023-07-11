@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './login.css'
 
-function Login({ setToken }) {
+function Login({ setToken, setUsuario }) {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [loginData, setLoginData] = useState({})
@@ -18,7 +18,7 @@ function Login({ setToken }) {
                 if (data.erro) {
                     alert(data.erro)
                 } else {
-                    console.log(data.accessToken)
+                    setUsuario(data.usuario)
                     setToken(data.accessToken)
                 }
             })

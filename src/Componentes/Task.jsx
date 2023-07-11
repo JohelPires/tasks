@@ -5,7 +5,8 @@ function Task({ tarefa }) {
     return (
         <div className="task-container">
             <h3>{tarefa.titulo.length > 40 ? tarefa.titulo.slice(0, 40) + '...' : tarefa.titulo}</h3>
-
+            <p>{tarefa.descricao}</p>
+            <p>{tarefa.vencimento}</p>
             <div className="controls">
                 <p>edit</p>
                 <p>del</p>

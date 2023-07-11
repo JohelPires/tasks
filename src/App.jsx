@@ -10,6 +10,7 @@ import { useState } from 'react'
 
 function App() {
     const [token, setToken] = useState('')
+    const [usuario, setUsuario] = useState('')
 
     return (
         <div className="App">
@@ -20,10 +21,13 @@ function App() {
                         <Link to="sobre">Sobre mim</Link>
                         <Link to="projetos">Projetos</Link>
                         <Link to="experiencias">Experiência</Link>
+                        <p>
+                            Olá, {usuario.nome} <Link>(sair)</Link>
+                        </p>
                     </nav>
                     <main className="container">
                         <Routes>
-                            <Route path="/" element={<Home />} />
+                            <Route path="/" element={<Home token={token} />} />
                             <Route path="experiencias" element={<Experiencias />} />
                             <Route path="projetos" element={<Projetos />} />
                             <Route path="contato" element={<Contato />} />
@@ -32,7 +36,7 @@ function App() {
                     </main>
                 </>
             ) : (
-                <Login setToken={setToken} />
+                <Login setToken={setToken} setUsuario={setUsuario} />
             )}
         </div>
     )

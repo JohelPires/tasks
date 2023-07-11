@@ -1,39 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import Task from '../Componentes/Task'
 // import '../App.css'
 
-function Home() {
+function Home({ token }) {
+    const [tarefas, setTarefas] = useState([])
+
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        },
+    }
+    console.log(requestOptions.headers)
+
     function fetchData(loginData) {
-        const requestOptions = {
-            method: 'POST',
-            body: JSON.stringify(loginData),
-            headers: new Headers({ 'Content-Type': 'application/json', Accept: 'application/json' }),
-        }
-        fetch('http://localhost:5000/usuario/login', requestOptions)
+        fetch('http://localhost:5000/tarefa', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                if (data.erro) {
-                    alert(data.erro)
-                } else {
-                    console.log(data.accessToken)
-                    console.log('teste')
-                    setToken(data.accessToken)
-                }
+                console.log(data)
+                setTarefas(data)
             })
             .catch((err) => console.log(err))
     }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
 
     return (
         <section className="hero">
             <div className="hero-content">
                 <h1>Tarefas</h1>
-                <p>Full Stack Developer</p>
-                <p>Passionate about creating innovative web solutions.</p>
-                <br />
-                <br />
-                <Link className="button" to="sobre">
-                    Sobre
-                </Link>
+
+                {tarefas.map((tarefa) => {
+                    return <Task tarefa={tarefa} />
+                })}
             </div>
         </section>
     )

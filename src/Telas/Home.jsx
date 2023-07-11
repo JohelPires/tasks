@@ -32,7 +32,7 @@ function Home({ token }) {
 
     return (
         <section className="hero">
-            <AddTask />
+            <AddTask token={token} />
             <div className="hero-content">
                 <h1>Tarefas</h1>
 

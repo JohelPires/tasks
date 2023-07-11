@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Task from '../Componentes/Task'
+import AddTask from '../Componentes/AddTask'
 // import '../App.css'
 
 function Home({ token }) {
@@ -31,6 +32,7 @@ function Home({ token }) {
 
     return (
         <section className="hero">
+            <AddTask />
             <div className="hero-content">
                 <h1>Tarefas</h1>
 

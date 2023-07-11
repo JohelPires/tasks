@@ -6,11 +6,11 @@ function AddTask() {
         <>
             <h1>Adicionar Tarefa</h1>
             <div className="add-task-container">
-                <input type="text" placeholder="Título da tarefa"></input>
-                <div className="add-task-date">
-                    <h5>Vencimento:</h5>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <input type="text" placeholder="Título da tarefa"></input>
                     <input className="date-input" type="date"></input>
                 </div>
+                <input type="text" placeholder="Descrição da tarefa"></input>
                 <button>Adicionar</button>
             </div>
         </>

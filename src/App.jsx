@@ -7,6 +7,7 @@ import Contato from './Telas/Contato'
 import Sobre from './Telas/Sobre'
 import Login from './Telas/Login'
 import { useState } from 'react'
+import Nav from './Componentes/Nav'
 
 function App() {
     const [token, setToken] = useState('')
@@ -16,15 +17,7 @@ function App() {
         <div className="App">
             {token ? (
                 <>
-                    <nav className="navbar">
-                        <Link to="/">Home</Link>
-                        <Link to="sobre">Sobre mim</Link>
-                        <Link to="projetos">Projetos</Link>
-                        <Link to="experiencias">Experiência</Link>
-                        <p>
-                            Olá, {usuario.nome} <Link>(sair)</Link>
-                        </p>
-                    </nav>
+                    <Nav usuario={usuario} />
                     <main className="container">
                         <Routes>
                             <Route path="/" element={<Home token={token} />} />

@@ -5,12 +5,19 @@ import Home from './Telas/Home'
 
 import Sobre from './Telas/Sobre'
 import Login from './Telas/Login'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Nav from './Componentes/Nav'
 
 function App() {
     const [token, setToken] = useState('')
     const [usuario, setUsuario] = useState('')
+    useEffect(() => {
+        const userdata = JSON.parse(localStorage.getItem('userData'))
+        if (userdata) {
+            setToken(userdata.accessToken)
+            setUsuario(userdata.usuario)
+        }
+    }, [])
 
     return (
         <div className="App">

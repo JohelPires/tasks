@@ -19,6 +19,7 @@ function Login({ setToken, setUsuario }) {
                 } else {
                     setUsuario(data.usuario)
                     setToken(data.accessToken)
+                    localStorage.setItem('userData', JSON.stringify(data))
                 }
             })
             .catch((err) => console.log(err))

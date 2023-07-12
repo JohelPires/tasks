@@ -1,8 +1,31 @@
 import React, { useState } from 'react'
 import './task.css'
 
-function Task({ tarefa }) {
+function Task({ tarefa, token, setReload }) {
     const [show, setShow] = useState(false)
+
+    function fetchDel(id) {
+        if (window.confirm('Tem certeza?') === false) {
+            console.log('cancelado')
+            return
+        }
+
+        const requestOptions = {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        }
+        fetch(`http://localhost:5000/tarefa/${id}`, requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                setReload((prev) => !prev)
+            })
+            .catch((err) => console.log(err))
+    }
+
     return (
         <div key={tarefa.id} className="task-container">
             <div className="task-main">
@@ -13,7 +36,7 @@ function Task({ tarefa }) {
                 <p>{tarefa.vencimento}</p>
                 <div className="controls">
                     <p>edit</p>
-                    <p>del</p>
+                    <button onClick={() => fetchDel(tarefa.id)}>del</button>
                     <p>priority</p>
                 </div>
             </div>

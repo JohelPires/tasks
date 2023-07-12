@@ -81,7 +81,7 @@ input {
     width: 100%;
 }
 
-button {
+.button {
     max-width: 150px;
     /* padding: 7px; */
     font-size: 1.1rem;
@@ -98,11 +98,11 @@ button {
     cursor: pointer;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 }
-button:hover {
+.button:hover {
     /* background-color: #fb9e25; */
     background-color: #11ca2a;
 }
-button:active {
+.button:active {
     position: relative;
     top: 1px;
 }

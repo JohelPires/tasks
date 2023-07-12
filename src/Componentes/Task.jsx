@@ -1,8 +1,14 @@
 import React, { useState } from 'react'
 import './task.css'
+import { useForm } from 'react-hook-form'
 
 function Task({ tarefa, token, setReload }) {
     const [show, setShow] = useState(false)
+    const [edit, setEdit] = useState(false)
+    const { register, handleSubmit } = useForm()
+    function onSubmit(data) {
+        console.log(data)
+    }
 
     function fetchDel(id) {
         if (window.confirm('Tem certeza?') === false) {
@@ -28,18 +34,39 @@ function Task({ tarefa, token, setReload }) {
 
     return (
         <div key={tarefa.id} className="task-container">
-            <div className="task-main">
-                <button onClick={() => !tarefa.status}>{tarefa.status ? 'x' : '-'}</button>
-                <h3 style={tarefa.descricao && { cursor: 'pointer' }} onClick={() => setShow((prev) => !prev)}>
-                    {tarefa.titulo.length > 40 ? tarefa.titulo.slice(0, 40) + '...' : tarefa.titulo}
-                </h3>
-                <p>{tarefa.vencimento}</p>
-                <div className="controls">
-                    <p>edit</p>
-                    <button onClick={() => fetchDel(tarefa.id)}>del</button>
-                    <p>priority</p>
+            {edit ? (
+                <form className="add-task-container" onSubmit={handleSubmit(onSubmit)}>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <input type="text" placeholder={tarefa.titulo} {...register('titulo')}></input>
+                        <input
+                            className="date-input"
+                            type="date"
+                            value={tarefa.vencimento}
+                            {...register('vencimento')}
+                        ></input>
+                    </div>
+                    <input type="text" placeholder={tarefa.descricao} {...register('descricao')}></input>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'right', gap: '10px' }}>
+                        <button onClick={() => setEdit((prev) => !prev)}>Cancelar</button>
+                        <button type="submit">Atualizar</button>
+                    </div>
+                </form>
+            ) : (
+                <div className="task-main">
+                    <button onClick={() => !tarefa.status}>{tarefa.status ? 'x' : '-'}</button>
+
+                    <h3 style={tarefa.descricao && { cursor: 'pointer' }} onClick={() => setShow((prev) => !prev)}>
+                        {tarefa.titulo.length > 40 ? tarefa.titulo.slice(0, 40) + '...' : tarefa.titulo}
+                    </h3>
+
+                    <p>{tarefa.vencimento}</p>
+                    <div className="controls">
+                        <button onClick={() => setEdit((prev) => !prev)}>edit</button>
+                        <button onClick={() => fetchDel(tarefa.id)}>del</button>
+                        <p>priority</p>
+                    </div>
                 </div>
-            </div>
+            )}
             <div style={{ display: show ? 'block' : 'none' }}>
                 {/* <div style={{ height: show ? '200px' : '100px' }}> */}
                 <p>{tarefa.descricao}</p>

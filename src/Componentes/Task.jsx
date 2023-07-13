@@ -83,7 +83,7 @@ function Task({ tarefa, token, setReload }) {
                 <div className="task-main">
                     <button onClick={() => !tarefa.status}>{tarefa.status ? 'x' : '-'}</button>
 
-                    <h3 style={tarefa.descricao && { cursor: 'pointer' }} onClick={() => setShow((prev) => !prev)}>
+                    <h3 style={{ cursor: 'pointer' }} onClick={() => setShow((prev) => !prev)}>
                         {tarefa.titulo.length > 40 ? tarefa.titulo.slice(0, 40) + '...' : tarefa.titulo}
                     </h3>
 

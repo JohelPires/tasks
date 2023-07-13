@@ -10,6 +10,10 @@ function AddTask({ token, setReload }) {
     }
 
     function fetchData(postData) {
+        const today = new Date()
+        if (postData.vencimento === '') {
+            postData = { ...postData, vencimento: `${today.toISOString().split('T')[0]}` }
+        }
         const requestOptions = {
             method: 'POST',
             body: JSON.stringify(postData),
@@ -18,6 +22,7 @@ function AddTask({ token, setReload }) {
                 'Content-Type': 'application/json',
             },
         }
+        console.log(postData)
         fetch('http://localhost:5000/tarefa', requestOptions)
             .then((response) => response.json())
             .then((data) => {

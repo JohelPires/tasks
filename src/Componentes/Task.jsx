@@ -6,8 +6,36 @@ function Task({ tarefa, token, setReload }) {
     const [show, setShow] = useState(false)
     const [edit, setEdit] = useState(false)
     const { register, handleSubmit } = useForm()
-    function onSubmit(data) {
-        console.log(data)
+
+    function onSubmit(data, id) {
+        let atualiza = { vencimento: data.vencimento }
+        if (data.titulo) {
+            atualiza = { ...atualiza, titulo: data.titulo }
+        }
+        if (data.descricao) {
+            atualiza = { ...atualiza, descricao: data.descricao }
+        }
+
+        console.log(atualiza, tarefa.id)
+        fetchPut(atualiza, tarefa.id, tarefa)
+        setEdit(false)
+    }
+
+    function fetchPut(putData, id) {
+        const requestOptions = {
+            method: 'PUT',
+            body: JSON.stringify(putData),
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        }
+        fetch(`http://localhost:5000/tarefa/${id}`, requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+            })
+            .catch((err) => console.log(err))
     }
 
     function fetchDel(id) {

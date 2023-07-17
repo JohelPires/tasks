@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { Form, Button, FormGroup, Container, Col, Row, FormControl, Stack } from 'react-bootstrap'
 import axios from 'axios'
 
-export default function Update({ item, setEdit, setReload }) {
+export default function Update({ item, setEdit, setReload, isAuth }) {
     const [titulo, setTitulo] = useState(item.titulo)
     const [descricao, setDescricao] = useState(item.descricao)
     const [vencimento, setVencimento] = useState(item.vencimento)
@@ -11,16 +11,16 @@ export default function Update({ item, setEdit, setReload }) {
 
     const updateData = () => {
         console.log(item.id, { titulo, descricao, vencimento })
-        // axios
-        //     .put(`https://64b03fbdc60b8f941af5776c.mockapi.io/fakeData/${item.id}`, {
-        //         firstName,
-        //         lastName,
-        //         checkbox,
-        //     })
-        //     .then((data) => {
-        //         console.log(data)
-        //         setReload((prev) => !prev)
-        //     })
+        axios
+            .put(`http://localhost:5000/tarefa/${item.id}`, {
+                titulo,
+                descricao,
+                vencimento,
+            })
+            .then((data) => {
+                console.log(data)
+                setReload((prev) => !prev)
+            })
         setEdit(false)
         setReload((prev) => !prev)
     }
@@ -32,52 +32,52 @@ export default function Update({ item, setEdit, setReload }) {
     // }
 
     return (
-        <div className='col-12'>
-            <Container fluid className='p-0'>
-                <Row className='justify-content-center'>
+        <div className="col-12">
+            <Container fluid className="p-0">
+                <Row className="justify-content-center">
                     <Form noValidate>
-                        <FormGroup as={Col} sm className='mb-3'>
+                        <FormGroup as={Col} sm className="mb-3">
                             <Form.Label>Nome</Form.Label>
                             <FormControl
                                 value={titulo}
-                                size='sm'
-                                name='titulo'
-                                type='text'
-                                placeholder='Nome'
+                                size="sm"
+                                name="titulo"
+                                type="text"
+                                placeholder="Nome"
                                 onChange={(e) => setTitulo(e.target.value)}
                             />
                         </FormGroup>
-                        <FormGroup as={Col} sm className='mb-3'>
+                        <FormGroup as={Col} sm className="mb-3">
                             <Form.Label>Descrição</Form.Label>
                             <FormControl
-                                size='sm'
-                                name='lastName'
-                                type='text'
+                                size="sm"
+                                name="lastName"
+                                type="text"
                                 value={descricao}
                                 onChange={(e) => setDescricao(e.target.value)}
                             />
                         </FormGroup>
-                        <Stack gap={2} direction='horizontal'>
+                        <Stack gap={2} direction="horizontal">
                             <FormGroup>
                                 <Form.Label>Vencimento</Form.Label>
                                 <Form.Control
                                     value={vencimento}
-                                    size='sm'
-                                    name='vencimento'
-                                    type='date'
+                                    size="sm"
+                                    name="vencimento"
+                                    type="date"
                                     onChange={(e) => setVencimento(e.target.value)}
                                 />
                             </FormGroup>
                             <Button
-                                variant='outline-primary'
-                                size='sm'
-                                className='ms-auto'
+                                variant="outline-primary"
+                                size="sm"
+                                className="ms-auto"
                                 onClick={updateData}
                                 // type='submit'
                             >
                                 Ok
                             </Button>
-                            <Button onClick={() => setEdit(false)} variant='outline-secondary' size='sm' type='submit'>
+                            <Button onClick={() => setEdit(false)} variant="outline-secondary" size="sm" type="submit">
                                 Cancel
                             </Button>
                         </Stack>

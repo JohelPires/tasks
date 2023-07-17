@@ -15,23 +15,23 @@ function Item({ item, setReload }) {
     }
 
     return (
-        <div key={item.id} className='item shadow'>
+        <div key={item.id} className="item shadow">
             {!edit && (
                 <>
                     <div>
                         <h6>{item.titulo}</h6>
-                        <p style={{ fontSize: '10px' }}>vencimento: {item.vencimento}</p>
-                        {item.descricao && <p style={{ fontSize: '12px' }}>{item.descricao}</p>}
+                        <p style={{ fontSize: '0.8rem' }}>vencimento: {item.vencimento}</p>
+                        {item.descricao && <p style={{ fontSize: '0.9rem' }}>{item.descricao}</p>}
                     </div>
 
                     <ButtonGroup>
-                        <Button size='sm' variant='outline-secondary' onClick={() => setEdit((prev) => !prev)}>
+                        <Button size="sm" variant="outline-secondary" onClick={() => setEdit((prev) => !prev)}>
                             done
                         </Button>
-                        <Button size='sm' variant='outline-secondary' onClick={() => setEdit((prev) => !prev)}>
+                        <Button size="sm" variant="outline-secondary" onClick={() => setEdit((prev) => !prev)}>
                             Editar
                         </Button>
-                        <Button size='sm' variant='outline-danger' onClick={handleDelete}>
+                        <Button size="sm" variant="outline-danger" onClick={handleDelete}>
                             Deletar
                         </Button>
                     </ButtonGroup>

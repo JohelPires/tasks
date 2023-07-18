@@ -15,51 +15,41 @@ function App() {
 
     console.log(isAuth)
     return (
-        <div className='App'>
+        <div className="App">
             {isAuth && (
-                <nav className='bg-dark rounded shadow w-75 text-light p-3 menu'>
-                    <Stack direction='horizontal' gap={2}>
+                <nav className="bg-dark rounded shadow w-75 text-light p-3 menu">
+                    <Stack direction="horizontal" gap={2}>
                         <Link to={'/'}>
                             <h2>Tarefas App</h2>
                         </Link>
-                        <Link className='ms-auto p-2' to={'/'}>
+                        {/* <Link className='ms-auto p-2' to={'/'}>
                             Listar
                         </Link>
                         <Link className='p-3' to={'/create'}>
                             Novo item
-                        </Link>
-                        Bem vindo, {isAuth.usuario.nome}
-                        <ButtonGroup>
-                            <Button
-                                variant='outline-light'
-                                size='sm'
-                                onClick={() => {
-                                    setIsAuth('')
-                                    localStorage.clear()
-                                }}
-                            >
-                                Logout
-                            </Button>
-                            <Button
-                                variant='outline-light'
-                                size='sm'
-                                onClick={() => {
-                                    navigate('/profile')
-                                }}
-                            >
-                                Perfil
-                            </Button>
-                        </ButtonGroup>
+                        </Link> */}
+                        <div className="ms-auto">Bem vindo, {isAuth.usuario.nome}</div>
+
+                        <Button
+                            variant="outline-light"
+                            size="sm"
+                            onClick={() => {
+                                setIsAuth('')
+                                localStorage.clear()
+                            }}
+                        >
+                            Logout
+                        </Button>
                     </Stack>
                 </nav>
             )}
             <Routes>
-                <Route path='/' element={isAuth ? <Read isAuth={isAuth} /> : <Navigate to={'/login'} />} />
-                <Route path='create' element={isAuth ? <Create isAuth={isAuth} /> : <Navigate to={'/login'} />} />
-                <Route path='profile' element={isAuth ? <Profile isAuth={isAuth} /> : <Navigate to={'/login'} />} />
+                <Route path="/" element={isAuth ? <Read isAuth={isAuth} /> : <Navigate to={'/login'} />} />
+                <Route path="create" element={isAuth ? <Create isAuth={isAuth} /> : <Navigate to={'/login'} />} />
+                <Route path="profile" element={isAuth ? <Profile isAuth={isAuth} /> : <Navigate to={'/login'} />} />
 
-                <Route path='login' element={<Login isAuth={isAuth} setIsAuth={setIsAuth} />} />
-                <Route path='register' element={<Register isAuth={isAuth} setIsAuth={setIsAuth} />} />
+                <Route path="login" element={<Login isAuth={isAuth} setIsAuth={setIsAuth} />} />
+                <Route path="register" element={<Register isAuth={isAuth} setIsAuth={setIsAuth} />} />
             </Routes>
         </div>
     )

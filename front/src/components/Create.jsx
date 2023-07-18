@@ -4,7 +4,7 @@ import { Form, Button, FormGroup, Container, Col, Row, FormControl } from 'react
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-export default function Create({ isAuth }) {
+export default function Create({ isAuth, setNova, setReload }) {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [checkbox, setCheckbox] = useState(false)
@@ -20,13 +20,18 @@ export default function Create({ isAuth }) {
 
     const postData = (data) => {
         console.log(isAuth)
+        if (data.vencimento === '') {
+            data.vencimento = '2023-01-01'
+        }
         axios
             .post('http://localhost:5000/tarefa', data, {
                 headers: { Authorization: `Bearer ${isAuth.accessToken}` },
             })
             .then((result) => {
                 console.log(result)
-                navigate('/')
+                setNova(false)
+                // navigate('/')
+                setReload((prev) => !prev)
             })
             .catch((err) => console.log(err))
     }
@@ -38,33 +43,33 @@ export default function Create({ isAuth }) {
     // }
 
     return (
-        <div className='col-md mx-auto'>
-            <Container fluid className='p-5'>
-                <Row className='justify-content-center'>
+        <div className="col-md mx-auto">
+            <Container fluid className="p-5">
+                <Row className="justify-content-center">
                     <Form noValidate validated={!!errors} onSubmit={handleSubmit(postData)}>
-                        <FormGroup as={Col} sm className='mb-3'>
+                        <FormGroup as={Col} sm className="mb-3">
                             <Form.Label>Título</Form.Label>
                             <FormControl
-                                name='titulo'
-                                type='text'
-                                placeholder='Titulo da tarefa'
+                                name="titulo"
+                                type="text"
+                                placeholder="Titulo da tarefa"
                                 {...register('titulo')}
                             />
                         </FormGroup>
-                        <FormGroup as={Col} sm className='mb-3'>
+                        <FormGroup as={Col} sm className="mb-3">
                             <Form.Label>Descrição</Form.Label>
                             <FormControl
-                                name='descricao'
-                                type='text'
-                                placeholder='Descrição'
+                                name="descricao"
+                                type="text"
+                                placeholder="Descrição"
                                 {...register('descricao')}
                             />
                         </FormGroup>
-                        <FormGroup as={Col} sm className='mb-3'>
+                        <FormGroup as={Col} sm className="mb-3">
                             <Form.Label>Vencimento</Form.Label>
-                            <FormControl name='vencimento' type='date' {...register('vencimento')} />
+                            <FormControl name="vencimento" type="date" {...register('vencimento')} />
                         </FormGroup>
-                        <Button type='submit'>Submit</Button>
+                        <Button type="submit">Submit</Button>
                     </Form>
                 </Row>
             </Container>

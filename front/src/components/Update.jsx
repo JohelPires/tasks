@@ -12,11 +12,17 @@ export default function Update({ item, setEdit, setReload, isAuth }) {
     const updateData = () => {
         console.log(item.id, { titulo, descricao, vencimento })
         axios
-            .put(`http://localhost:5000/tarefa/${item.id}`, {
-                titulo,
-                descricao,
-                vencimento,
-            })
+            .put(
+                `http://localhost:5000/tarefa/${item.id}`,
+                {
+                    titulo,
+                    descricao,
+                    vencimento,
+                },
+                {
+                    headers: { Authorization: `Bearer ${isAuth.accessToken}` },
+                }
+            )
             .then((data) => {
                 console.log(data)
                 setReload((prev) => !prev)

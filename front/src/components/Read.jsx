@@ -1,14 +1,16 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Container, Spinner, Stack } from 'react-bootstrap'
+import { Button, Container, Spinner, Stack } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Update from './Update'
 import Item from './Item'
+import Create from './Create'
 
 function Read({ isAuth }) {
     const [dados, setDados] = useState([])
     const [reload, setReload] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [nova, setNova] = useState(false)
 
     function getData() {
         axios
@@ -35,14 +37,19 @@ function Read({ isAuth }) {
     }, [reload])
 
     return (
-        <div className='col-md col-8 mx-auto mt-5'>
+        <div className="col-md col-8 mx-auto mt-5">
+            <Button className="m-2" onClick={() => setNova((prev) => !prev)}>
+                Criar nova tarefa
+            </Button>
+            {nova && <Create isAuth={isAuth} setNova={setNova} setReload={setReload} />}
+
             {loading ? (
-                <Spinner animation='border' variant='primary' />
+                <Spinner animation="border" variant="primary" />
             ) : (
                 <Container>
                     <Stack gap={3}>
                         {dados.map((item) => {
-                            return <Item key={item.id} item={item} setReload={setReload} />
+                            return <Item isAuth={isAuth} key={item.id} item={item} setReload={setReload} />
                         })}
                     </Stack>
                 </Container>

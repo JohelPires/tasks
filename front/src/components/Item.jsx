@@ -21,7 +21,7 @@ function Item({ item, setReload }) {
                     <div>
                         <h6>{item.titulo}</h6>
                         <p style={{ fontSize: '10px' }}>vencimento: {item.vencimento}</p>
-                        <p>{item.descricao}</p>
+                        {item.descricao && <p style={{ fontSize: '12px' }}>{item.descricao}</p>}
                     </div>
 
                     <ButtonGroup>

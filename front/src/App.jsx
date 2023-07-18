@@ -55,7 +55,7 @@ function App() {
             )}
             <Routes>
                 <Route path='/' element={isAuth ? <Read isAuth={isAuth} /> : <Navigate to={'/login'} />} />
-                <Route path='create' element={isAuth ? <Create /> : <Navigate to={'/login'} />} />
+                <Route path='create' element={isAuth ? <Create isAuth={isAuth} /> : <Navigate to={'/login'} />} />
                 <Route path='profile' element={isAuth ? <Profile isAuth={isAuth} /> : <Navigate to={'/login'} />} />
 
                 <Route path='login' element={<Login isAuth={isAuth} setIsAuth={setIsAuth} />} />

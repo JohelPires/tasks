@@ -4,7 +4,7 @@ import { Form, Button, FormGroup, Container, Col, Row, FormControl } from 'react
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-export default function Create() {
+export default function Create({ isAuth }) {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [checkbox, setCheckbox] = useState(false)
@@ -18,14 +18,17 @@ export default function Create() {
     const onSubmit = (data) => console.log(data)
     // console.log(errors)
 
-    const postData = () => {
+    const postData = (data) => {
+        console.log(isAuth)
         axios
-            .post('https://64b03fbdc60b8f941af5776c.mockapi.io/fakeData', {
-                firstName,
-                lastName,
-                checkbox,
+            .post('http://localhost:5000/tarefa', data, {
+                headers: { Authorization: `Bearer ${isAuth.accessToken}` },
             })
-            .then(() => navigate('/'))
+            .then((result) => {
+                console.log(result)
+                navigate('/')
+            })
+            .catch((err) => console.log(err))
     }
 
     //     const postData = () => {
@@ -38,36 +41,30 @@ export default function Create() {
         <div className='col-md mx-auto'>
             <Container fluid className='p-5'>
                 <Row className='justify-content-center'>
-                    <Form noValidate validated={!!errors} onSubmit={handleSubmit(onSubmit)}>
+                    <Form noValidate validated={!!errors} onSubmit={handleSubmit(postData)}>
                         <FormGroup as={Col} sm className='mb-3'>
-                            <Form.Label>Nome</Form.Label>
+                            <Form.Label>Título</Form.Label>
                             <FormControl
-                                name='firstName'
+                                name='titulo'
                                 type='text'
-                                placeholder='Nome'
-                                onChange={(e) => setFirstName(e.target.value)}
+                                placeholder='Titulo da tarefa'
+                                {...register('titulo')}
                             />
                         </FormGroup>
                         <FormGroup as={Col} sm className='mb-3'>
-                            <Form.Label>Sobrenome</Form.Label>
+                            <Form.Label>Descrição</Form.Label>
                             <FormControl
-                                name='lastName'
+                                name='descricao'
                                 type='text'
-                                placeholder='Sobrenome'
-                                onChange={(e) => setLastName(e.target.value)}
+                                placeholder='Descrição'
+                                {...register('descricao')}
                             />
                         </FormGroup>
-                        <FormGroup>
-                            <Form.Check
-                                name='checkbox'
-                                type='checkbox'
-                                label='Concordo com todos os serviços.'
-                                onChange={(e) => setCheckbox(!checkbox)}
-                            />
+                        <FormGroup as={Col} sm className='mb-3'>
+                            <Form.Label>Vencimento</Form.Label>
+                            <FormControl name='vencimento' type='date' {...register('vencimento')} />
                         </FormGroup>
-                        <Button onClick={postData} type='submit'>
-                            Submit
-                        </Button>
+                        <Button type='submit'>Submit</Button>
                     </Form>
                 </Row>
             </Container>

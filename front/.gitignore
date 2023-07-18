@@ -2,9 +2,6 @@
 
 # dependencies
 /node_modules
-/projetoTarefas-backend/node_modules
-/front/node_modules
-/projetoTarefas-backend/src/secret.js
 /.pnp
 .pnp.js
 

@@ -60,6 +60,10 @@ function Task({ tarefa, token, setReload }) {
             .catch((err) => console.log(err))
     }
 
+    function handleStatusChange(e) {
+        alert(e)
+    }
+
     return (
         <div key={tarefa.id} className="task-container">
             {edit ? (
@@ -81,7 +85,7 @@ function Task({ tarefa, token, setReload }) {
                 </form>
             ) : (
                 <div className="task-main">
-                    <button onClick={() => !tarefa.status}>{tarefa.status ? 'x' : '-'}</button>
+                    <button onClick={handleStatusChange}>{tarefa.status ? 'x' : '-'}</button>
 
                     <h3 style={{ cursor: 'pointer' }} onClick={() => setShow((prev) => !prev)}>
                         {tarefa.titulo.length > 40 ? tarefa.titulo.slice(0, 40) + '...' : tarefa.titulo}

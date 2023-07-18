@@ -4,22 +4,23 @@ import { Form, Button, FormGroup, Container, Col, Row, FormControl, Stack } from
 import axios from 'axios'
 
 export default function Update({ item, setEdit, setReload }) {
-    const [firstName, setFirstName] = useState(item.firstName)
-    const [lastName, setLastName] = useState(item.lastName)
-    const [checkbox, setCheckbox] = useState(item.checkbox)
+    const [titulo, setTitulo] = useState(item.titulo)
+    const [descricao, setDescricao] = useState(item.descricao)
+    const [vencimento, setVencimento] = useState(item.vencimento)
+    // const [status, setStatus] = useState(item.status)
 
     const updateData = () => {
-        console.log(item.id, { firstName, lastName, checkbox })
-        axios
-            .put(`https://64b03fbdc60b8f941af5776c.mockapi.io/fakeData/${item.id}`, {
-                firstName,
-                lastName,
-                checkbox,
-            })
-            .then((data) => {
-                console.log(data)
-                setReload((prev) => !prev)
-            })
+        console.log(item.id, { titulo, descricao, vencimento })
+        // axios
+        //     .put(`https://64b03fbdc60b8f941af5776c.mockapi.io/fakeData/${item.id}`, {
+        //         firstName,
+        //         lastName,
+        //         checkbox,
+        //     })
+        //     .then((data) => {
+        //         console.log(data)
+        //         setReload((prev) => !prev)
+        //     })
         setEdit(false)
         setReload((prev) => !prev)
     }
@@ -38,36 +39,35 @@ export default function Update({ item, setEdit, setReload }) {
                         <FormGroup as={Col} sm className='mb-3'>
                             <Form.Label>Nome</Form.Label>
                             <FormControl
-                                value={firstName}
+                                value={titulo}
                                 size='sm'
-                                name='firstName'
+                                name='titulo'
                                 type='text'
                                 placeholder='Nome'
-                                onChange={(e) => setFirstName(e.target.value)}
+                                onChange={(e) => setTitulo(e.target.value)}
                             />
                         </FormGroup>
                         <FormGroup as={Col} sm className='mb-3'>
-                            <Form.Label>Sobrenome</Form.Label>
+                            <Form.Label>Descrição</Form.Label>
                             <FormControl
                                 size='sm'
                                 name='lastName'
                                 type='text'
-                                placeholder='Sobrenome'
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
-                            />
-                        </FormGroup>
-                        <FormGroup>
-                            <Form.Check
-                                value={checkbox}
-                                size='sm'
-                                name='checkbox'
-                                type='checkbox'
-                                label='Concordo com todos os serviços.'
-                                onChange={(e) => setCheckbox(!checkbox)}
+                                value={descricao}
+                                onChange={(e) => setDescricao(e.target.value)}
                             />
                         </FormGroup>
                         <Stack gap={2} direction='horizontal'>
+                            <FormGroup>
+                                <Form.Label>Vencimento</Form.Label>
+                                <Form.Control
+                                    value={vencimento}
+                                    size='sm'
+                                    name='vencimento'
+                                    type='date'
+                                    onChange={(e) => setVencimento(e.target.value)}
+                                />
+                            </FormGroup>
                             <Button
                                 variant='outline-primary'
                                 size='sm'

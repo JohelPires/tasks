@@ -36,15 +36,21 @@ function Read({ isAuth }) {
         getData()
     }, [reload])
 
+    console.log(dados)
+    dados.sort((a, b) => a.vencimento - b.vencimento)
+    dados.sort((a, b) => a.status - b.status)
+    //users.sort((a, b) => b.isMember - a.isMember)
+    console.log(dados)
+
     return (
-        <div className="col-md col-8 mx-auto mt-5">
-            <Button className="m-2" onClick={() => setNova((prev) => !prev)}>
+        <div className='col-md col-8 mx-auto mt-5'>
+            <Button className='m-2' onClick={() => setNova((prev) => !prev)}>
                 Criar nova tarefa
             </Button>
             {nova && <Create isAuth={isAuth} setNova={setNova} setReload={setReload} />}
 
             {loading ? (
-                <Spinner animation="border" variant="primary" />
+                <Spinner animation='border' variant='primary' />
             ) : (
                 <Container>
                     <Stack gap={3}>

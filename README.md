@@ -9,11 +9,11 @@ Para instalar este projeto, você precisará de Node.js e npm instalados. Depois
 
 ### para execução da API:
 
-### `cd projetoTarefas-backend`
+    `cd projetoTarefas-backend`
 
-### `npm install`
+    `npm install`
 
-### `npm start`
+    `npm start`
 
 Você pode configurar o gerenciador de tarefas editando o arquivo config.json. Este arquivo contém as seguintes configurações:
 

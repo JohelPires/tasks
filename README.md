@@ -25,7 +25,7 @@ Você pode configurar o gerenciador de tarefas editando o arquivo config.json. E
     npm install
     npm start
 
-Uso
+## Uso
 
 Para usar o gerenciador de tarefas, você precisará criar uma conta. Depois de criar uma conta, você poderá fazer login e começar a criar tarefas.
 
